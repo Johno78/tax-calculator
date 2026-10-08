@@ -369,7 +369,8 @@
     const pensionPct = Math.max(Number(pensionInput.value)||0, 0)/100;
     const pension = gross * pensionPct;
 
-    const taxablePay = pensionPretaxInput.checked ? Math.max(gross - pension, 0) : gross;
+    // Isle of Man payroll tax is worked on whole pounds of taxable pay (matches Tesco payslips)
+    const taxablePay = Math.round(pensionPretaxInput.checked ? Math.max(gross - pension, 0) : gross);
     const niablePay = pensionSacrificeInput.checked ? Math.max(gross - pension, 0) : gross;
 
     // Income tax
